@@ -1,3 +1,4 @@
 # EjerciciosPia
 Los ejercicios de clase
 # ESTO ES PARA YO LUEGO DECIR QUE PRACTICO EN CASA PERO ES UNA MENTIRA COMO UN MUNDO #
+## **EL OMNI**
