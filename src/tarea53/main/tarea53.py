@@ -1,5 +1,11 @@
 import random
+import os
 
+def clear():
+    if os.name =='nt':
+        os.system('CLS')
+    if os.name == 'posix':
+        os.system('clear')
 
 class Blackjack:
     def __init__(self):
@@ -42,11 +48,21 @@ class Blackjack:
             else:
                puntos += int(carta)
         return puntos
+    def resultado(self):
+        if self.puntosBanca > 21 and self.puntosJugador <=21:
+            return True
+        elif self.puntosJugador > self.puntosBanca and self.puntosJugador <= 21:
+            return True
+        elif self.puntosBanca > self.puntosJugador and self.puntosBanca <= 21:
+            return False
+        elif self.puntosJugador == self.puntosBanca:
+            return False
+        elif self.puntosBanca < self.puntosJugador and self.puntosJugador > 21:
+            return False
 
-    ##def jugarBanca(self):
-        
 
 if __name__ == "__main__":
+    clear()
     blackjack = Blackjack()
     blackjack.prepararMesa()
     blackjack.mostrarMesa()
@@ -56,5 +72,12 @@ if __name__ == "__main__":
             blackjack.jugador.append(blackjack.sacarCarta())
             blackjack.puntosJugador = blackjack.calcPuntos(blackjack.jugador)
             blackjack.mostrarMesa()
-        elif turno == "n":
+        elif turno == "n":            
+            while blackjack.puntosBanca < blackjack.puntosJugador:
+                blackjack.banca.append(blackjack.sacarCarta())
+                blackjack.puntosBanca = blackjack.calcPuntos(blackjack.banca)
             break
+    if blackjack.resultado():
+        print(f"El jugador tiene {blackjack.jugador} y gana con {blackjack.puntosJugador} puntos mientras que la banca tiene {blackjack.banca} siendo estos {blackjack.puntosBanca} puntos")
+    else: 
+        print(f"El jugador tiene {blackjack.jugador} y pierde con {blackjack.puntosJugador} puntos mientras que la banca tiene {blackjack.banca} siendo estos {blackjack.puntosBanca} puntos")
